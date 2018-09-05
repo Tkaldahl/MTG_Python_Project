@@ -16,8 +16,23 @@ Including another URLconf
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
+from django.contrib.auth import views as auth_views
+from mtg import views as mtg_views
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'main_page'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mtg.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup/', mtg_views.sign_up, name='sign_up'),
+    path('accounts/logout/', auth_views.logout, name='logout'),
+
+    url(r'^admin/', admin.site.urls),
+    url(r'', include('mtg.urls')),
+    url(r'^accounts/login/$', auth_views.login, name='login'),
+    url(r'^accounts/logout/$', auth_views.logout, name='logout'),   
 ]
