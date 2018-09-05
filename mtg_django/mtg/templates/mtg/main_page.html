@@ -7,46 +7,9 @@
     </head>
     <body>
         <h1>Hello World</h1>
-        {%for card in card %}
+        {%for card in cards %}
         <h2>name: {{card.name}}</h2>
-        <img src="{{card.image_url}}" alt="{{card.name}} image">
         <h6>multiverse_id: {{card.multiverse_id}}</h6>
-        <h6>layout: {{card.layout}}</h6>
-        <h6>names: {{card.names}}</h6>
-        <h6>mana_cost: {{card.mana_cost}}</h6>
-        <h6>cmc: {{card.cmc}}</h6>
-        <h6>colors: {{card.colors}}</h6>
-        <h6>color_identity: {{card.color_identity}}</h6>
-        <h6>type: {{card.type}}</h6>
-        <h6>supertypes: {{card.supertypes}}</h6>
-        <h6>subtypes: {{card.subtypes}}</h6>
-        <h6>rarity: {{card.rarity}}</h6>
-        <h6>text: {{card.text}}</h6>
-        <h6>flavor: {{card.flavor}}</h6>
-        <h6>artist: {{card.artist}}</h6>
-        <h6>number: {{card.number}}</h6>
-        <h6>power: {{card.power}}</h6>
-        <h6>toughness: {{card.toughness}}</h6>
-        <h6>loyalty: {{card.loyalty}}</h6>
-        <h6>variations: {{card.variations}}</h6>
-        <h6>watermark: {{card.watermark}}</h6>
-        <h6>border: {{card.border}}</h6>
-        <h6>timeshifted: {{card.timeshifted}}</h6>
-        <h6>hand: {{card.hand}}</h6>
-        <h6>reserved: {{card.reserved}}</h6>
-        <h6>release_date: {{card.release_date}}</h6>
-        <h6>starter: {{card.starter}}</h6>
-        <h6>rulings: {{card.rulings}}</h6>
-        <h6>foreign_names: {{card.foreign_names}}</h6>
-        <h6>printings: {{card.printings}}</h6>
-        <h6>original_text: {{card.original_text}}</h6>
-        <h6>original_type: {{card.original_type}}</h6>
-        <h6>legalities: {{card.legalities}}</h6>
-        <h6>source: {{card.source}}</h6>
-        <h6>image_url: {{card.image_url}}</h6>
-        <h6>set: {{card.set}}</h6>
-        <h6>set_name: {{card.set_name}}</h6>
-        <h6>life: {{card.life}}</h6>
         {% endfor %}
     </body>
 </html>
