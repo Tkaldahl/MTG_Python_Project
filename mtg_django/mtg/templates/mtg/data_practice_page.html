@@ -1,0 +1,19 @@
+{% extends 'mtg/base.html' %}
+
+{% block content %}
+<html>
+    <head>
+        <title>MTG Practice</title>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <!-- {%for card in cards %}
+        <h2>legalities: {{card.legalities}}</h2>
+        <h6>multiverse_id: {{card.multiverse_id}}</h6>
+        {% endfor %} -->
+        {% for card in legalities_check %}
+        <h4>legalities: {{card.legalities}}</h4>
+        {% endfor %}
+    </body>
+</html>
+{% endblock %}

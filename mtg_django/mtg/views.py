@@ -24,17 +24,34 @@ def sign_up(request):
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
-@login_required
 def main_page(request):
+    return render(request, 'mtg/main_page.html')
+
+def login_redirect(request):
+    return render(request, 'mtg/main_page.html')
+
+@login_required
+def deck_builder(request):
     cards = Card.objects.all()
-    return render(request, 'mtg/main_page.html', {'cards': cards})
+    card_names = []
+    for card in cards:
+        card_names.append(card.name)
+    return render(request, 'mtg/deck_builder.html', {'card_names': card_names})
+
+
+# The functions below are for development testing only
+@login_required
+def data_practice_page(request):
+    cards = Card.objects.all()
+    legalities_check = SDKCard.where(page=50).where(pageSize=100).all()
+    return render(request, 'mtg/data_practice_page.html', {'legalities_check': legalities_check})
 
 @login_required
 def mtg_database_scraper(request):
     cards = []
     i = 1
     response = [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
-    # cards.extend(SDKCard.where(page=2).where(pageSize=100).all())
+    # MTG API only allows 100 results at a time. The loop below pages through the database, and cleans up the data so we can print it to a webpage to copy into the database
     while len(response) == 100:
         response = SDKCard.where(page=i).where(pageSize=100).all()
         for card in response:
@@ -58,7 +75,7 @@ def mtg_database_scraper(request):
             if card.printings != None:
                 card.printings = ' '.join(card.printings)
             if card.legalities != None:
-                card.legalities = str(card.rulings)
+                card.legalities = str(card.legalities)
             if card.artist != None:
                 card.artist = card.artist.replace("'", "\\'")
             if card.set_name != None:
@@ -66,4 +83,4 @@ def mtg_database_scraper(request):
         cards.extend(response)
         i = i + 1
         print(i)
-    return render(request, 'mtg/mtg_database_scraper.html', {'card': cards})
+    return render(request, 'mtg/mtg_database_scraper.html', {'cards': cards})

@@ -29,7 +29,9 @@ urlpatterns = [
     path('', include('mtg.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', mtg_views.sign_up, name='sign_up'),
+    path('accounts/profile/', mtg_views.login_redirect, name='login_redirect'),
     path('accounts/logout/', auth_views.logout, name='logout'),
+
 
     url(r'^admin/', admin.site.urls),
     url(r'', include('mtg.urls')),

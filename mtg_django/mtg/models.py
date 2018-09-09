@@ -28,3 +28,25 @@ class Card(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Deck(models.Model):
+    name = models.CharField(max_length=500)
+    competitive_format = models.CharField(max_length=500)
+    description = models.TextField(null=True)
+    author = models.ForeignKey('auth.User', related_name='decks', null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class Mainboard(models.Model):
+    card_id = models.ForeignKey(Card, related_name='mainboard', null=True, on_delete=models.SET_NULL)
+    quantity = models.IntegerField()
+    deck_id = models.ForeignKey(Deck, related_name='mainboard', on_delete=models.CASCADE)
+
+
+class SideBoard(models.Model):
+    card_id = models.ForeignKey(Card, related_name='sideboard', null=True, on_delete=models.SET_NULL)
+    quantity = models.IntegerField()
+    deck_id = models.ForeignKey(Deck, related_name='sideboard', on_delete=models.CASCADE)
